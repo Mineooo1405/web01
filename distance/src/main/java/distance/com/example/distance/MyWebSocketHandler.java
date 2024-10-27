@@ -1,9 +1,10 @@
 package distance.com.example.distance;
-
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+@Component
 public class MyWebSocketHandler extends TextWebSocketHandler {
     private WebSocketSession esp32Session;
 
