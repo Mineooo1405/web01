@@ -37,10 +37,16 @@ function DataTable() {
   };
 
   // Function to handle new button click
-  const handleNewButtonClick = () => {
-    console.log("New Button Clicked");
-    // Logic to send signal to ESP32 or any other action
-  };
+  const handleNewButtonClick = async () => {
+    try {
+        const response = await axios.post("http://localhost:8080/Distance/sendSignal", {
+            signal: "Button Pressed"
+        });
+        console.log("Signal sent to backend:", response.data);
+    } catch (error) {
+        console.error("Error sending signal:", error);
+    }
+};
 
   // Get the latest and second latest distances
   const latestDistance = parseFloat(data[0]?.distance || 0);
