@@ -7,7 +7,7 @@ import axios from "axios";
 function DataTable() {
   const [data, setData] = useState([]);
   const [isDrawerVisible, setDrawerVisible] = useState(false);
-  const path = "http://localhost:8080/Distance/GetDistance";
+  const path = "http://192.168.1.53:8080/Distance/GetDistance";
 
   const fetchData = async () => {
     try {
@@ -26,72 +26,62 @@ function DataTable() {
     fetchData();
   }, []);
 
-  // Function to open the drawer
   const openDrawer = () => {
     setDrawerVisible(true);
   };
 
-  // Function to close the drawer
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
 
-  // Function to handle new button click
   const handleNewButtonClick = async () => {
     try {
-        const response = await axios.post("http://localhost:8080/Distance/sendSignal", {
-            signal: "Button Pressed"
-        });
-        console.log("Signal sent to backend:", response.data);
+      const response = await axios.post("http://192.168.1.53:8080/Distance/sendSignal", {
+        signal: "Button Pressed"
+      });
+      console.log("Signal sent to backend:", response.data);
     } catch (error) {
-        console.error("Error sending signal:", error);
+      console.error("Error sending signal:", error);
     }
-};
+  };
 
-  // Get the latest and second latest distances
   const latestDistance = parseFloat(data[0]?.distance || 0);
   const secondLatestDistance = parseFloat(data[1]?.distance || 0);
 
-  // Determine the arrow direction based on the comparison
-  const arrowDirection =
-    latestDistance > secondLatestDistance ? (
-      <AiOutlineArrowUp className="text-green-500 inline" />
-    ) : (
-      <AiOutlineArrowDown className="text-red-500 inline" />
-    );
+  const arrowDirection = latestDistance > secondLatestDistance ? (
+    <AiOutlineArrowUp className="text-green-500 inline" />
+  ) : (
+    <AiOutlineArrowDown className="text-red-500 inline" />
+  );
 
   return (
     <div className="w-screen min-h-screen bg-gray-900 flex justify-center items-center text-gray-300">
-      <div className="bg-gray-800 shadow-lg rounded-lg w-1/3 relative p-4">
-        {/* Left Section: Latest Data */}
-        <h1 className="text-center text-4xl">Distance Measuring Device</h1>
-        <div className="flex justify-around p-2 rounded-lg">
-          <div className="flex-col justify-around">
-            <div className="text-2xl m-1">DATE:</div>
+      <div className="bg-gray-800 shadow-lg rounded-lg w-full max-w-md p-4">
+        <h1 className="text-center text-3xl sm:text-4xl">Distance Measuring Device</h1>
+        <div className="flex flex-col sm:flex-row justify-between p-2 rounded-lg">
+          <div className="flex-col">
+            <div className="text-xl sm:text-2xl m-1">DATE:</div>
             <div>{data[0]?.date}</div>
           </div>
-          <div className="text-2xl m-1 flex flex-col">
+          <div className="text-xl sm:text-2xl m-1 flex flex-col">
             <div>DISTANCE:</div>
             <div>
               {data[0]?.distance} m {arrowDirection}
             </div>
           </div>
         </div>
-        {/* Button to open the drawer, positioned to the right */}
         <button
           className="bg-blue-600 text-white w-full px-4 py-2 rounded-lg hover:bg-blue-700"
           onClick={openDrawer}
         >
           Old Measurements
         </button>
-        {/* New Button to send signal or perform an action */}
         <button
           className="bg-green-600 text-white w-full px-4 py-2 rounded-lg mt-4 hover:bg-green-700"
           onClick={handleNewButtonClick}
         >
           Send Signal to ESP32
         </button>
-        {/* Right Section: Other Items inside Drawer */}
         <Drawer
           title="Old Measurements"
           placement="right"

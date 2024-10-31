@@ -3,13 +3,13 @@ spring:
     url: jdbc:sqlserver://MINNN:1433;database=Distance;encrypt=false;trustServerCertificate=true;
     username: sa
     password: 123456
-
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: none  # Không tự động tạo bảng
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
-  server:
-    server.address = 0.0.0.0
+server:
+  port: 8080
+  address: 0.0.0.0  # Lắng nghe trên tất cả các địa chỉ IP
