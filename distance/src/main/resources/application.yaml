@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://MINNN:1433;database=Distance;encrypt=false;trustServerCertificate=true;
+    url: jdbc:sqlserver://DESKTOP-DJIQMDH\SQLEXPRESS:1433;database=Distance;encrypt=false
     username: sa
-    password: 123456
+    password: 12345
 
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:

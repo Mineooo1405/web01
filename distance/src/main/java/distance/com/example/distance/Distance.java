@@ -4,8 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
-
-import java.time.Instant;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -13,11 +12,11 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Distance{ 
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Distance {
     @Id
-    @Column(name = "Date", nullable = false)
-    private Instant id;
+    @Column(name = "Distance", nullable = false)
+    private Double id;
 
-    @Column(name = "Distance")
-    private Double Distance;
+    //TODO [Reverse Engineering] generate columns from DB
 }
