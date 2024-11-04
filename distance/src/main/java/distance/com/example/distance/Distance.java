@@ -15,8 +15,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Distance {
     @Id
-    @Column(name = "Distance", nullable = false)
-    private Double id;
+    @Column(name = "Distance", nullable = false, columnDefinition = "FLOAT")
+    private Float id;
 
     //TODO [Reverse Engineering] generate columns from DB
 }

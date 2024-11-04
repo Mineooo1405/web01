@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.Map;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +25,12 @@ public class WebSocketController {
     @PostMapping("/storeData")
     public String storeData(@RequestParam("file")MultipartFile file) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        List<Float> dataList = mapper.readValue(file.getInputStream(), new TypeReference<List<Float>>() {});
+
+        Map<String, List<Float>> jsonData = mapper.readValue(file.getInputStream(), new TypeReference<Map<String, List<Float>>>() {});
+
+        List<Float> dataList = jsonData.get("float_numbers");
+
+        webSocketHandler.storeDistance(dataList);
         return "Successfully stored data";
     }
 
