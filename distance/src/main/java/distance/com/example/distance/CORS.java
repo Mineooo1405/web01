@@ -13,7 +13,6 @@ public class CORS implements WebMvcConfigurer {
         registry.addMapping("/**") // Cho phép tất cả các endpoint
                 .allowedOrigins("http://192.168.1.53:5173") // Thay bằng địa chỉ frontend của bạn
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Các phương thức HTTP cho phép
-                .allowedHeaders("*"); // Cho phép tất cả các header
-                
+                .allowedHeaders("*"); // Cho phép tất cả các header         
     }
 }
